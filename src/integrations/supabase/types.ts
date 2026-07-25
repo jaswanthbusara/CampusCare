@@ -132,6 +132,60 @@ export type Database = {
         }
         Relationships: []
       }
+      lost_items: {
+        Row: {
+          category: string
+          claimed_at: string | null
+          claimed_by: string | null
+          contact_info: string | null
+          created_at: string
+          description: string
+          id: string
+          image_path: string | null
+          location: string | null
+          occurred_on: string | null
+          status: Database["public"]["Enums"]["lost_item_status"]
+          title: string
+          type: Database["public"]["Enums"]["lost_item_type"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          claimed_at?: string | null
+          claimed_by?: string | null
+          contact_info?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          image_path?: string | null
+          location?: string | null
+          occurred_on?: string | null
+          status?: Database["public"]["Enums"]["lost_item_status"]
+          title: string
+          type: Database["public"]["Enums"]["lost_item_type"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          claimed_at?: string | null
+          claimed_by?: string | null
+          contact_info?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          image_path?: string | null
+          location?: string | null
+          occurred_on?: string | null
+          status?: Database["public"]["Enums"]["lost_item_status"]
+          title?: string
+          type?: Database["public"]["Enums"]["lost_item_type"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -226,6 +280,8 @@ export type Database = {
         | "in_progress"
         | "completed"
         | "rejected"
+      lost_item_status: "open" | "claimed" | "resolved" | "closed"
+      lost_item_type: "lost" | "found"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -381,6 +437,8 @@ export const Constants = {
         "completed",
         "rejected",
       ],
+      lost_item_status: ["open", "claimed", "resolved", "closed"],
+      lost_item_type: ["lost", "found"],
     },
   },
 } as const

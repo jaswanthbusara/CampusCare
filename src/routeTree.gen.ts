@@ -12,9 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedLostFoundRouteImport } from './routes/_authenticated/lost-found'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedComplaintsRouteImport } from './routes/_authenticated/complaints'
+import { Route as AuthenticatedLostFoundIndexRouteImport } from './routes/_authenticated/lost-found.index'
 import { Route as AuthenticatedComplaintsIndexRouteImport } from './routes/_authenticated/complaints.index'
+import { Route as AuthenticatedLostFoundNewRouteImport } from './routes/_authenticated/lost-found.new'
 import { Route as AuthenticatedComplaintsNewRouteImport } from './routes/_authenticated/complaints.new'
 
 const AuthRoute = AuthRouteImport.update({
@@ -31,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedLostFoundRoute = AuthenticatedLostFoundRouteImport.update({
+  id: '/lost-found',
+  path: '/lost-found',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -41,11 +49,23 @@ const AuthenticatedComplaintsRoute = AuthenticatedComplaintsRouteImport.update({
   path: '/complaints',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLostFoundIndexRoute =
+  AuthenticatedLostFoundIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedLostFoundRoute,
+  } as any)
 const AuthenticatedComplaintsIndexRoute =
   AuthenticatedComplaintsIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedComplaintsRoute,
+  } as any)
+const AuthenticatedLostFoundNewRoute =
+  AuthenticatedLostFoundNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AuthenticatedLostFoundRoute,
   } as any)
 const AuthenticatedComplaintsNewRoute =
   AuthenticatedComplaintsNewRouteImport.update({
@@ -59,15 +79,20 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/complaints': typeof AuthenticatedComplaintsRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
+  '/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/complaints/': typeof AuthenticatedComplaintsIndexRoute
+  '/lost-found/': typeof AuthenticatedLostFoundIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
+  '/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/complaints': typeof AuthenticatedComplaintsIndexRoute
+  '/lost-found': typeof AuthenticatedLostFoundIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -76,8 +101,11 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/complaints': typeof AuthenticatedComplaintsRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
   '/_authenticated/complaints/new': typeof AuthenticatedComplaintsNewRoute
+  '/_authenticated/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/_authenticated/complaints/': typeof AuthenticatedComplaintsIndexRoute
+  '/_authenticated/lost-found/': typeof AuthenticatedLostFoundIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -86,10 +114,20 @@ export interface FileRouteTypes {
     | '/auth'
     | '/complaints'
     | '/dashboard'
+    | '/lost-found'
     | '/complaints/new'
+    | '/lost-found/new'
     | '/complaints/'
+    | '/lost-found/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/complaints/new' | '/complaints'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/complaints/new'
+    | '/lost-found/new'
+    | '/complaints'
+    | '/lost-found'
   id:
     | '__root__'
     | '/'
@@ -97,8 +135,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/complaints'
     | '/_authenticated/dashboard'
+    | '/_authenticated/lost-found'
     | '/_authenticated/complaints/new'
+    | '/_authenticated/lost-found/new'
     | '/_authenticated/complaints/'
+    | '/_authenticated/lost-found/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/lost-found': {
+      id: '/_authenticated/lost-found'
+      path: '/lost-found'
+      fullPath: '/lost-found'
+      preLoaderRoute: typeof AuthenticatedLostFoundRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -144,12 +192,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedComplaintsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/lost-found/': {
+      id: '/_authenticated/lost-found/'
+      path: '/'
+      fullPath: '/lost-found/'
+      preLoaderRoute: typeof AuthenticatedLostFoundIndexRouteImport
+      parentRoute: typeof AuthenticatedLostFoundRoute
+    }
     '/_authenticated/complaints/': {
       id: '/_authenticated/complaints/'
       path: '/'
       fullPath: '/complaints/'
       preLoaderRoute: typeof AuthenticatedComplaintsIndexRouteImport
       parentRoute: typeof AuthenticatedComplaintsRoute
+    }
+    '/_authenticated/lost-found/new': {
+      id: '/_authenticated/lost-found/new'
+      path: '/new'
+      fullPath: '/lost-found/new'
+      preLoaderRoute: typeof AuthenticatedLostFoundNewRouteImport
+      parentRoute: typeof AuthenticatedLostFoundRoute
     }
     '/_authenticated/complaints/new': {
       id: '/_authenticated/complaints/new'
@@ -177,14 +239,32 @@ const AuthenticatedComplaintsRouteWithChildren =
     AuthenticatedComplaintsRouteChildren,
   )
 
+interface AuthenticatedLostFoundRouteChildren {
+  AuthenticatedLostFoundNewRoute: typeof AuthenticatedLostFoundNewRoute
+  AuthenticatedLostFoundIndexRoute: typeof AuthenticatedLostFoundIndexRoute
+}
+
+const AuthenticatedLostFoundRouteChildren: AuthenticatedLostFoundRouteChildren =
+  {
+    AuthenticatedLostFoundNewRoute: AuthenticatedLostFoundNewRoute,
+    AuthenticatedLostFoundIndexRoute: AuthenticatedLostFoundIndexRoute,
+  }
+
+const AuthenticatedLostFoundRouteWithChildren =
+  AuthenticatedLostFoundRoute._addFileChildren(
+    AuthenticatedLostFoundRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedComplaintsRoute: typeof AuthenticatedComplaintsRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedLostFoundRoute: typeof AuthenticatedLostFoundRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedComplaintsRoute: AuthenticatedComplaintsRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedLostFoundRoute: AuthenticatedLostFoundRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -198,13 +278,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
