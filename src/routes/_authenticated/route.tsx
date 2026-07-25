@@ -9,6 +9,7 @@ import {
   LogOut,
   Plus,
   User as UserIcon,
+  PackageSearch,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/_authenticated")({
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/complaints", label: "Complaints", icon: Wrench },
+  { to: "/lost-found", label: "Lost & Found", icon: PackageSearch },
 ];
 
 function AuthedLayout() {
