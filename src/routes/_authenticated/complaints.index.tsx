@@ -108,8 +108,12 @@ function ComplaintsList() {
         ) : (
           <ul className="divide-y">
             {filtered.map((c) => (
-              <li key={c.id} className="p-4 sm:p-5">
-                <div className="flex items-start justify-between gap-4">
+              <li key={c.id} className="transition-colors hover:bg-accent/40">
+                <Link
+                  to="/complaints/$id"
+                  params={{ id: c.id }}
+                  className="flex items-start justify-between gap-4 p-4 sm:p-5"
+                >
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <div className="font-semibold">{c.title}</div>
@@ -125,7 +129,7 @@ function ComplaintsList() {
                       {formatDistanceToNow(new Date(c.created_at), { addSuffix: true })}
                     </div>
                   </div>
-                </div>
+                </Link>
               </li>
             ))}
           </ul>
