@@ -19,6 +19,7 @@ import { Route as AuthenticatedLostFoundIndexRouteImport } from './routes/_authe
 import { Route as AuthenticatedComplaintsIndexRouteImport } from './routes/_authenticated/complaints.index'
 import { Route as AuthenticatedLostFoundNewRouteImport } from './routes/_authenticated/lost-found.new'
 import { Route as AuthenticatedComplaintsNewRouteImport } from './routes/_authenticated/complaints.new'
+import { Route as AuthenticatedComplaintsIdRouteImport } from './routes/_authenticated/complaints.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -73,6 +74,12 @@ const AuthenticatedComplaintsNewRoute =
     path: '/new',
     getParentRoute: () => AuthenticatedComplaintsRoute,
   } as any)
+const AuthenticatedComplaintsIdRoute =
+  AuthenticatedComplaintsIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedComplaintsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/complaints': typeof AuthenticatedComplaintsRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
+  '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
   '/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/complaints/': typeof AuthenticatedComplaintsIndexRoute
@@ -89,6 +97,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
   '/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/complaints': typeof AuthenticatedComplaintsIndexRoute
@@ -102,6 +111,7 @@ export interface FileRoutesById {
   '/_authenticated/complaints': typeof AuthenticatedComplaintsRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
+  '/_authenticated/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/_authenticated/complaints/new': typeof AuthenticatedComplaintsNewRoute
   '/_authenticated/lost-found/new': typeof AuthenticatedLostFoundNewRoute
   '/_authenticated/complaints/': typeof AuthenticatedComplaintsIndexRoute
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/complaints'
     | '/dashboard'
     | '/lost-found'
+    | '/complaints/$id'
     | '/complaints/new'
     | '/lost-found/new'
     | '/complaints/'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/dashboard'
+    | '/complaints/$id'
     | '/complaints/new'
     | '/lost-found/new'
     | '/complaints'
@@ -136,6 +148,7 @@ export interface FileRouteTypes {
     | '/_authenticated/complaints'
     | '/_authenticated/dashboard'
     | '/_authenticated/lost-found'
+    | '/_authenticated/complaints/$id'
     | '/_authenticated/complaints/new'
     | '/_authenticated/lost-found/new'
     | '/_authenticated/complaints/'
@@ -220,16 +233,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedComplaintsNewRouteImport
       parentRoute: typeof AuthenticatedComplaintsRoute
     }
+    '/_authenticated/complaints/$id': {
+      id: '/_authenticated/complaints/$id'
+      path: '/$id'
+      fullPath: '/complaints/$id'
+      preLoaderRoute: typeof AuthenticatedComplaintsIdRouteImport
+      parentRoute: typeof AuthenticatedComplaintsRoute
+    }
   }
 }
 
 interface AuthenticatedComplaintsRouteChildren {
+  AuthenticatedComplaintsIdRoute: typeof AuthenticatedComplaintsIdRoute
   AuthenticatedComplaintsNewRoute: typeof AuthenticatedComplaintsNewRoute
   AuthenticatedComplaintsIndexRoute: typeof AuthenticatedComplaintsIndexRoute
 }
 
 const AuthenticatedComplaintsRouteChildren: AuthenticatedComplaintsRouteChildren =
   {
+    AuthenticatedComplaintsIdRoute: AuthenticatedComplaintsIdRoute,
     AuthenticatedComplaintsNewRoute: AuthenticatedComplaintsNewRoute,
     AuthenticatedComplaintsIndexRoute: AuthenticatedComplaintsIndexRoute,
   }
