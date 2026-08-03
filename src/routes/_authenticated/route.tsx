@@ -10,6 +10,10 @@ import {
   Plus,
   User as UserIcon,
   PackageSearch,
+  Megaphone,
+  Sparkles,
+  Boxes,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -26,8 +30,13 @@ export const Route = createFileRoute("/_authenticated")({
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/complaints", label: "Complaints", icon: Wrench },
+  { to: "/cleaning", label: "Cleanliness", icon: Sparkles },
   { to: "/lost-found", label: "Lost & Found", icon: PackageSearch },
-];
+  { to: "/resources", label: "Resources", icon: Boxes },
+  { to: "/announcements", label: "Announcements", icon: Megaphone },
+  { to: "/analytics", label: "Analytics", icon: BarChart3 },
+] as const;
+
 
 function AuthedLayout() {
   const { user } = Route.useRouteContext();
