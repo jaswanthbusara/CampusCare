@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          audience: Database["public"]["Enums"]["app_role"][] | null
+          body: string
+          created_at: string
+          created_by: string
+          id: string
+          pinned: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audience?: Database["public"]["Enums"]["app_role"][] | null
+          body: string
+          created_at?: string
+          created_by: string
+          id?: string
+          pinned?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audience?: Database["public"]["Enums"]["app_role"][] | null
+          body?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          pinned?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      cleaning_requests: {
+        Row: {
+          area_type: string
+          assigned_to: string | null
+          building: string
+          completed_at: string | null
+          created_at: string
+          description: string
+          floor: string | null
+          id: string
+          remarks: string | null
+          room: string | null
+          scheduled_for: string | null
+          status: Database["public"]["Enums"]["cleaning_status"]
+          updated_at: string
+          urgency: Database["public"]["Enums"]["complaint_priority"]
+          user_id: string
+        }
+        Insert: {
+          area_type?: string
+          assigned_to?: string | null
+          building: string
+          completed_at?: string | null
+          created_at?: string
+          description: string
+          floor?: string | null
+          id?: string
+          remarks?: string | null
+          room?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["cleaning_status"]
+          updated_at?: string
+          urgency?: Database["public"]["Enums"]["complaint_priority"]
+          user_id: string
+        }
+        Update: {
+          area_type?: string
+          assigned_to?: string | null
+          building?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string
+          floor?: string | null
+          id?: string
+          remarks?: string | null
+          room?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["cleaning_status"]
+          updated_at?: string
+          urgency?: Database["public"]["Enums"]["complaint_priority"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       complaint_feedback: {
         Row: {
           complaint_id: string
@@ -219,6 +306,48 @@ export type Database = {
         }
         Relationships: []
       }
+      resources: {
+        Row: {
+          active: boolean
+          building: string | null
+          category: Database["public"]["Enums"]["complaint_category"]
+          code: string
+          created_at: string
+          created_by: string | null
+          floor: string | null
+          id: string
+          name: string
+          room: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          building?: string | null
+          category?: Database["public"]["Enums"]["complaint_category"]
+          code: string
+          created_at?: string
+          created_by?: string | null
+          floor?: string | null
+          id?: string
+          name: string
+          room?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          building?: string | null
+          category?: Database["public"]["Enums"]["complaint_category"]
+          code?: string
+          created_at?: string
+          created_by?: string | null
+          floor?: string | null
+          id?: string
+          name?: string
+          room?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -255,6 +384,12 @@ export type Database = {
     }
     Enums: {
       app_role: "student" | "teacher" | "staff" | "admin"
+      cleaning_status:
+        | "pending"
+        | "scheduled"
+        | "in_progress"
+        | "completed"
+        | "rejected"
       complaint_category:
         | "fan"
         | "light"
@@ -410,6 +545,13 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["student", "teacher", "staff", "admin"],
+      cleaning_status: [
+        "pending",
+        "scheduled",
+        "in_progress",
+        "completed",
+        "rejected",
+      ],
       complaint_category: [
         "fan",
         "light",

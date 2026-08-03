@@ -10,6 +10,10 @@ import {
   Plus,
   User as UserIcon,
   PackageSearch,
+  Megaphone,
+  Sparkles,
+  Boxes,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -26,8 +30,13 @@ export const Route = createFileRoute("/_authenticated")({
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/complaints", label: "Complaints", icon: Wrench },
+  { to: "/cleaning", label: "Cleanliness", icon: Sparkles },
   { to: "/lost-found", label: "Lost & Found", icon: PackageSearch },
-];
+  { to: "/resources", label: "Resources", icon: Boxes },
+  { to: "/announcements", label: "Announcements", icon: Megaphone },
+  { to: "/analytics", label: "Analytics", icon: BarChart3 },
+] as const;
+
 
 function AuthedLayout() {
   const { user } = Route.useRouteContext();
@@ -131,14 +140,14 @@ function AuthedLayout() {
         </header>
 
         {/* Mobile nav strip */}
-        <nav className="flex gap-1 border-b bg-card p-2 lg:hidden">
+        <nav className="flex gap-1 overflow-x-auto border-b bg-card p-2 lg:hidden">
           {nav.map((item) => {
             const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm ${
+                className={`flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm ${
                   active ? "bg-primary/10 text-primary" : "text-muted-foreground"
                 }`}
               >
