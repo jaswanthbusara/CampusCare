@@ -14,6 +14,8 @@ import {
   Sparkles,
   Boxes,
   BarChart3,
+  Users,
+
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -36,6 +38,9 @@ const nav = [
   { to: "/announcements", label: "Announcements", icon: Megaphone },
   { to: "/analytics", label: "Analytics", icon: BarChart3 },
 ] as const;
+
+const adminNav = [{ to: "/users", label: "Users", icon: Users } as const];
+
 
 
 function AuthedLayout() {
@@ -61,6 +66,9 @@ function AuthedLayout() {
     })();
   }, [user.id]);
 
+  const navItems = role === "admin" ? [...nav, ...adminNav] : [...nav];
+
+
   const signOut = async () => {
     await queryClient.cancelQueries();
     queryClient.clear();
@@ -78,7 +86,7 @@ function AuthedLayout() {
           <div className="font-bold">CRMCRS</div>
         </div>
         <nav className="p-3">
-          {nav.map((item) => {
+          {navItems.map((item) => {
             const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
@@ -141,7 +149,7 @@ function AuthedLayout() {
 
         {/* Mobile nav strip */}
         <nav className="flex gap-1 overflow-x-auto border-b bg-card p-2 lg:hidden">
-          {nav.map((item) => {
+          {navItems.map((item) => {
             const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
