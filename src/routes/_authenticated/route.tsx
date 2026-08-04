@@ -83,7 +83,7 @@ function AuthedLayout() {
           <div className="font-bold">CRMCRS</div>
         </div>
         <nav className="p-3">
-          {nav.map((item) => {
+          {navItems.map((item) => {
             const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
@@ -146,7 +146,7 @@ function AuthedLayout() {
 
         {/* Mobile nav strip */}
         <nav className="flex gap-1 overflow-x-auto border-b bg-card p-2 lg:hidden">
-          {nav.map((item) => {
+          {navItems.map((item) => {
             const active = pathname === item.to || pathname.startsWith(item.to + "/");
             return (
               <Link
