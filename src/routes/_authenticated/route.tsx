@@ -37,6 +37,9 @@ const nav = [
   { to: "/analytics", label: "Analytics", icon: BarChart3 },
 ] as const;
 
+const adminNav = [{ to: "/users", label: "Users", icon: Users } as const];
+
+
 
 function AuthedLayout() {
   const { user } = Route.useRouteContext();
