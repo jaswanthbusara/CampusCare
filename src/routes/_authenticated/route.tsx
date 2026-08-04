@@ -66,6 +66,9 @@ function AuthedLayout() {
     })();
   }, [user.id]);
 
+  const navItems = role === "admin" ? [...nav, ...adminNav] : [...nav];
+
+
   const signOut = async () => {
     await queryClient.cancelQueries();
     queryClient.clear();
