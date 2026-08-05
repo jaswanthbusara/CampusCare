@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
+import { Route as AuthenticatedSafetyRouteImport } from './routes/_authenticated/safety'
 import { Route as AuthenticatedResourcesRouteImport } from './routes/_authenticated/resources'
 import { Route as AuthenticatedLostFoundRouteImport } from './routes/_authenticated/lost-found'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -44,6 +45,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   id: '/users',
   path: '/users',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSafetyRoute = AuthenticatedSafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedResourcesRoute = AuthenticatedResourcesRouteImport.update({
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
   '/resources': typeof AuthenticatedResourcesRoute
+  '/safety': typeof AuthenticatedSafetyRoute
   '/users': typeof AuthenticatedUsersRoute
   '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/cleaning': typeof AuthenticatedCleaningRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/resources': typeof AuthenticatedResourcesRoute
+  '/safety': typeof AuthenticatedSafetyRoute
   '/users': typeof AuthenticatedUsersRoute
   '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/lost-found': typeof AuthenticatedLostFoundRouteWithChildren
   '/_authenticated/resources': typeof AuthenticatedResourcesRoute
+  '/_authenticated/safety': typeof AuthenticatedSafetyRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/_authenticated/complaints/new': typeof AuthenticatedComplaintsNewRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/lost-found'
     | '/resources'
+    | '/safety'
     | '/users'
     | '/complaints/$id'
     | '/complaints/new'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/cleaning'
     | '/dashboard'
     | '/resources'
+    | '/safety'
     | '/users'
     | '/complaints/$id'
     | '/complaints/new'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/lost-found'
     | '/_authenticated/resources'
+    | '/_authenticated/safety'
     | '/_authenticated/users'
     | '/_authenticated/complaints/$id'
     | '/_authenticated/complaints/new'
@@ -262,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof AuthenticatedUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/safety': {
+      id: '/_authenticated/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof AuthenticatedSafetyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/resources': {
@@ -400,6 +419,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLostFoundRoute: typeof AuthenticatedLostFoundRouteWithChildren
   AuthenticatedResourcesRoute: typeof AuthenticatedResourcesRoute
+  AuthenticatedSafetyRoute: typeof AuthenticatedSafetyRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedReportCodeRoute: typeof AuthenticatedReportCodeRoute
 }
@@ -412,6 +432,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLostFoundRoute: AuthenticatedLostFoundRouteWithChildren,
   AuthenticatedResourcesRoute: AuthenticatedResourcesRoute,
+  AuthenticatedSafetyRoute: AuthenticatedSafetyRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedReportCodeRoute: AuthenticatedReportCodeRoute,
 }

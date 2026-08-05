@@ -15,6 +15,8 @@ import {
   Boxes,
   BarChart3,
   Users,
+  ShieldAlert,
+
 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,6 +35,7 @@ const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/complaints", label: "Complaints", icon: Wrench },
   { to: "/cleaning", label: "Cleanliness", icon: Sparkles },
+  { to: "/safety", label: "Ragging & Harassment", icon: ShieldAlert },
   { to: "/lost-found", label: "Lost & Found", icon: PackageSearch },
   { to: "/resources", label: "Resources", icon: Boxes },
   { to: "/announcements", label: "Announcements", icon: Megaphone },

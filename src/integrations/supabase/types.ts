@@ -306,6 +306,63 @@ export type Database = {
         }
         Relationships: []
       }
+      ragging_reports: {
+        Row: {
+          building: string | null
+          category: Database["public"]["Enums"]["ragging_category"]
+          created_at: string
+          description: string
+          floor: string | null
+          id: string
+          incident_date: string | null
+          is_anonymous: boolean
+          remarks: string | null
+          room: string | null
+          severity: string
+          status: Database["public"]["Enums"]["ragging_status"]
+          title: string
+          updated_at: string
+          user_id: string
+          wing: Database["public"]["Enums"]["ragging_wing"]
+        }
+        Insert: {
+          building?: string | null
+          category?: Database["public"]["Enums"]["ragging_category"]
+          created_at?: string
+          description: string
+          floor?: string | null
+          id?: string
+          incident_date?: string | null
+          is_anonymous?: boolean
+          remarks?: string | null
+          room?: string | null
+          severity?: string
+          status?: Database["public"]["Enums"]["ragging_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+          wing: Database["public"]["Enums"]["ragging_wing"]
+        }
+        Update: {
+          building?: string | null
+          category?: Database["public"]["Enums"]["ragging_category"]
+          created_at?: string
+          description?: string
+          floor?: string | null
+          id?: string
+          incident_date?: string | null
+          is_anonymous?: boolean
+          remarks?: string | null
+          room?: string | null
+          severity?: string
+          status?: Database["public"]["Enums"]["ragging_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+          wing?: Database["public"]["Enums"]["ragging_wing"]
+        }
+        Relationships: []
+      }
       resources: {
         Row: {
           active: boolean
@@ -420,6 +477,21 @@ export type Database = {
         | "rejected"
       lost_item_status: "open" | "claimed" | "resolved" | "closed"
       lost_item_type: "lost" | "found"
+      ragging_category:
+        | "ragging"
+        | "harassment"
+        | "bullying"
+        | "cyber_bullying"
+        | "physical_abuse"
+        | "verbal_abuse"
+        | "other"
+      ragging_status:
+        | "pending"
+        | "under_review"
+        | "action_taken"
+        | "resolved"
+        | "rejected"
+      ragging_wing: "girls" | "boys"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -584,6 +656,23 @@ export const Constants = {
       ],
       lost_item_status: ["open", "claimed", "resolved", "closed"],
       lost_item_type: ["lost", "found"],
+      ragging_category: [
+        "ragging",
+        "harassment",
+        "bullying",
+        "cyber_bullying",
+        "physical_abuse",
+        "verbal_abuse",
+        "other",
+      ],
+      ragging_status: [
+        "pending",
+        "under_review",
+        "action_taken",
+        "resolved",
+        "rejected",
+      ],
+      ragging_wing: ["girls", "boys"],
     },
   },
 } as const
