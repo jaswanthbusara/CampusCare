@@ -99,7 +99,7 @@ function Landing() {
             <div className="grid h-9 w-9 place-items-center rounded-xl gradient-primary text-primary-foreground shadow-elevated">
               <LayoutDashboard className="h-5 w-5" />
             </div>
-            <div className="font-bold tracking-tight">CRMCRS</div>
+            <div className="font-bold tracking-tight">Campus Care</div>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <a href="#features" className="hover:text-foreground">Features</a>
@@ -218,7 +218,7 @@ function Landing() {
 
       <footer className="border-t bg-card">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:px-6">
-          <div>© {new Date().getFullYear()} CRMCRS — Smart Campus Management</div>
+          <div>© {new Date().getFullYear()} Campus Care — Smart Campus Management</div>
           <div className="flex gap-6">
             <a href="#features" className="hover:text-foreground">Features</a>
             <a href="#faq" className="hover:text-foreground">FAQ</a>
