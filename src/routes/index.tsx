@@ -19,13 +19,13 @@ export const Route = createFileRoute("/")({
   component: Landing,
   head: () => ({
     meta: [
-      { title: "CRMCRS — Smart Campus Resource & Complaint Management" },
+      { title: "Campus Care — Smart Campus Resource & Complaint Management" },
       {
         name: "description",
         content:
           "Report campus issues, track resolution, and manage resources with a modern, secure smart-campus platform.",
       },
-      { property: "og:title", content: "CRMCRS — Smart Campus Resource & Complaint Management" },
+      { property: "og:title", content: "Campus Care — Smart Campus Resource & Complaint Management" },
       {
         property: "og:description",
         content:
