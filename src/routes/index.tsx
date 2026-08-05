@@ -11,6 +11,8 @@ import {
   QrCode,
   ArrowRight,
   ShieldCheck,
+  ShieldAlert,
+
   LayoutDashboard,
   MessageSquare,
 } from "lucide-react";
