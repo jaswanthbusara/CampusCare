@@ -83,7 +83,7 @@ function AuthedLayout() {
           <div className="grid h-9 w-9 place-items-center rounded-xl gradient-primary text-primary-foreground">
             <LayoutDashboard className="h-5 w-5" />
           </div>
-          <div className="font-bold">CRMCRS</div>
+          <div className="font-bold">Campus Care</div>
         </div>
         <nav className="p-3">
           {navItems.map((item) => {
@@ -127,7 +127,7 @@ function AuthedLayout() {
             <div className="grid h-8 w-8 place-items-center rounded-lg gradient-primary text-primary-foreground">
               <LayoutDashboard className="h-4 w-4" />
             </div>
-            <div className="font-semibold">CRMCRS</div>
+            <div className="font-semibold">Campus Care</div>
           </div>
           <div className="hidden text-sm text-muted-foreground lg:block">
             Welcome back, <span className="font-medium text-foreground">{name}</span>

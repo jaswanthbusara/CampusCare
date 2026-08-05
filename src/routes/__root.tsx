@@ -79,14 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CRMCRS — Smart Campus Resource & Complaint Management" },
+      { title: "Campus Care — Smart Campus Resource & Complaint Management" },
       {
         name: "description",
         content:
           "Digitize campus maintenance, complaint resolution, cleanliness services and lost & found in one modern platform.",
       },
-      { name: "author", content: "CRMCRS" },
-      { property: "og:title", content: "CRMCRS — Smart Campus Resource & Complaint Management" },
+      { name: "author", content: "Campus Care" },
+      { property: "og:title", content: "Campus Care — Smart Campus Resource & Complaint Management" },
       {
         property: "og:description",
         content:
