@@ -78,15 +78,16 @@ function Counter({ value, label }: { value: number; label: string }) {
 }
 
 const features = [
-  { icon: Wrench, title: "Complaint Management", desc: "Submit, assign, and resolve issues with a full audit trail." },
-  { icon: LayoutDashboard, title: "Resource Tracking", desc: "Inventory every asset with maintenance history." },
-  { icon: Search, title: "Lost & Found", desc: "Post, search, verify — reunite items with owners." },
-  { icon: Sparkles, title: "Cleanliness Requests", desc: "Route hygiene issues to the right team fast." },
-  { icon: Bell, title: "Realtime Notifications", desc: "Email + in-app updates at every workflow step." },
-  { icon: Star, title: "Feedback & Ratings", desc: "5-star reviews drive technician performance." },
-  { icon: QrCode, title: "QR Reporting", desc: "Scan any resource to auto-fill a complaint." },
-  { icon: ShieldCheck, title: "Role-based Access", desc: "Students, teachers, staff, admins — each with the right view." },
-];
+  { icon: Wrench, title: "Complaint Management", desc: "Submit, assign, and resolve issues with a full audit trail.", to: "/complaints" },
+  { icon: ShieldAlert, title: "Ragging & Harassment", desc: "Confidential reporting with separate girls and boys wings.", to: "/safety" },
+  { icon: LayoutDashboard, title: "Resource Tracking", desc: "Inventory every asset with maintenance history.", to: "/resources" },
+  { icon: Search, title: "Lost & Found", desc: "Post, search, verify — reunite items with owners.", to: "/lost-found" },
+  { icon: Sparkles, title: "Cleanliness Requests", desc: "Route hygiene issues to the right team fast.", to: "/cleaning" },
+  { icon: Bell, title: "Announcements", desc: "Campus-wide notices targeted to the right roles.", to: "/announcements" },
+  { icon: Star, title: "Feedback & Ratings", desc: "5-star reviews drive technician performance.", to: "/complaints" },
+  { icon: QrCode, title: "QR Reporting", desc: "Scan any resource to auto-fill a complaint.", to: "/resources" },
+] as const;
+
 
 function Landing() {
   const stats = useStats();
