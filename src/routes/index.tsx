@@ -173,8 +173,9 @@ function Landing() {
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f) => (
-            <div
+            <Link
               key={f.title}
+              to={f.to}
               className="group rounded-2xl border bg-card p-6 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-elevated"
             >
               <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground transition-colors group-hover:gradient-primary group-hover:text-primary-foreground">
@@ -182,8 +183,9 @@ function Landing() {
               </div>
               <div className="font-semibold">{f.title}</div>
               <p className="mt-1.5 text-sm text-muted-foreground">{f.desc}</p>
-            </div>
+            </Link>
           ))}
+
         </div>
       </section>
 
