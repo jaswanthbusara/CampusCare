@@ -39,13 +39,12 @@ function UsersPage() {
   const qc = useQueryClient();
   const [q, setQ] = useState("");
 
-  const adminExists = useQuery({
+  const checkAdminExists = useServerFn(adminExists);
+  const doClaimFirstAdmin = useServerFn(claimFirstAdmin);
+
+  const adminExistsQuery = useQuery({
     queryKey: ["admin-exists"],
-    queryFn: async () => {
-      const { data, error } = await supabase.rpc("admin_exists");
-      if (error) throw error;
-      return data as boolean;
-    },
+    queryFn: () => checkAdminExists(),
   });
 
   const users = useQuery({
