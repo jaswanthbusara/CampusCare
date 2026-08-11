@@ -111,10 +111,10 @@ function UsersPage() {
           </CardTitle>
           <CardDescription>
             You need the admin role to manage users.
-            {adminExists.data === false && " No admin exists yet — you can claim it now."}
+            {adminExistsQuery.data === false && " No admin exists yet — you can claim it now."}
           </CardDescription>
         </CardHeader>
-        {adminExists.data === false && (
+        {adminExistsQuery.data === false && (
           <CardContent>
             <Button onClick={() => claim.mutate()} disabled={claim.isPending} className="gradient-primary text-primary-foreground">
               Claim admin access
