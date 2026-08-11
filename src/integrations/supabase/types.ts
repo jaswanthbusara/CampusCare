@@ -219,12 +219,37 @@ export type Database = {
         }
         Relationships: []
       }
+      lost_item_contacts: {
+        Row: {
+          contact_info: string | null
+          created_at: string
+          item_id: string
+        }
+        Insert: {
+          contact_info?: string | null
+          created_at?: string
+          item_id: string
+        }
+        Update: {
+          contact_info?: string | null
+          created_at?: string
+          item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lost_item_contacts_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: true
+            referencedRelation: "lost_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lost_items: {
         Row: {
           category: string
           claimed_at: string | null
           claimed_by: string | null
-          contact_info: string | null
           created_at: string
           description: string
           id: string
@@ -241,7 +266,6 @@ export type Database = {
           category: string
           claimed_at?: string | null
           claimed_by?: string | null
-          contact_info?: string | null
           created_at?: string
           description: string
           id?: string
@@ -258,7 +282,6 @@ export type Database = {
           category?: string
           claimed_at?: string | null
           claimed_by?: string | null
-          contact_info?: string | null
           created_at?: string
           description?: string
           id?: string
@@ -305,6 +328,32 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      ragging_report_identities: {
+        Row: {
+          created_at: string
+          report_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          report_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          report_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ragging_report_identities_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "ragging_reports"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ragging_reports: {
         Row: {
@@ -428,36 +477,7 @@ export type Database = {
       }
     }
     Views: {
-      lost_item_contacts: {
-        Row: {
-          contact_info: string | null
-          id: string | null
-        }
-        Insert: {
-          contact_info?: string | null
-          id?: string | null
-        }
-        Update: {
-          contact_info?: string | null
-          id?: string | null
-        }
-        Relationships: []
-      }
-      ragging_report_reporters: {
-        Row: {
-          id: string | null
-          user_id: string | null
-        }
-        Insert: {
-          id?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          id?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       admin_exists: { Args: never; Returns: boolean }
