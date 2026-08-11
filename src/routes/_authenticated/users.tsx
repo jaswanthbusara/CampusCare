@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { adminExists, claimFirstAdmin } from "@/lib/admin.functions";
 import { useRole, type AppRole } from "@/hooks/use-role";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,13 +41,12 @@ function UsersPage() {
   const qc = useQueryClient();
   const [q, setQ] = useState("");
 
-  const adminExists = useQuery({
+  const checkAdminExists = useServerFn(adminExists);
+  const doClaimFirstAdmin = useServerFn(claimFirstAdmin);
+
+  const adminExistsQuery = useQuery({
     queryKey: ["admin-exists"],
-    queryFn: async () => {
-      const { data, error } = await supabase.rpc("admin_exists");
-      if (error) throw error;
-      return data as boolean;
-    },
+    queryFn: () => checkAdminExists(),
   });
 
   const users = useQuery({
@@ -67,9 +68,7 @@ function UsersPage() {
 
   const claim = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase.rpc("claim_first_admin");
-      if (error) throw error;
-      return data as boolean;
+      return await doClaimFirstAdmin();
     },
     onSuccess: (ok) => {
       if (ok) {
@@ -77,7 +76,7 @@ function UsersPage() {
         qc.invalidateQueries();
       } else {
         toast.error("An admin already exists");
-        adminExists.refetch();
+        adminExistsQuery.refetch();
       }
     },
     onError: (e: Error) => toast.error(e.message),
@@ -112,10 +111,10 @@ function UsersPage() {
           </CardTitle>
           <CardDescription>
             You need the admin role to manage users.
-            {adminExists.data === false && " No admin exists yet — you can claim it now."}
+            {adminExistsQuery.data === false && " No admin exists yet — you can claim it now."}
           </CardDescription>
         </CardHeader>
-        {adminExists.data === false && (
+        {adminExistsQuery.data === false && (
           <CardContent>
             <Button onClick={() => claim.mutate()} disabled={claim.isPending} className="gradient-primary text-primary-foreground">
               Claim admin access

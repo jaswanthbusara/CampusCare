@@ -76,18 +76,29 @@ function NewLostFound() {
         image_path = path;
       }
 
-      const { error } = await supabase.from("lost_items").insert({
-        user_id: user.id,
-        type: values.type,
-        title: values.title,
-        description: values.description,
-        category: values.category,
-        location: values.location || null,
-        occurred_on: values.occurred_on || null,
-        contact_info: values.contact_info || null,
-        image_path,
-      });
+      const { data: inserted, error } = await supabase
+        .from("lost_items")
+        .insert({
+          user_id: user.id,
+          type: values.type,
+          title: values.title,
+          description: values.description,
+          category: values.category,
+          location: values.location || null,
+          occurred_on: values.occurred_on || null,
+          image_path,
+        })
+        .select("id")
+        .single();
       if (error) throw error;
+
+      if (values.contact_info && inserted) {
+        // Contact details live in a separate, access-restricted table.
+        const { error: contactErr } = await supabase
+          .from("lost_item_contacts")
+          .insert({ item_id: inserted.id, contact_info: values.contact_info });
+        if (contactErr) throw contactErr;
+      }
 
       toast.success("Item posted");
       navigate({ to: "/lost-found" });
