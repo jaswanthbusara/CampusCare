@@ -119,7 +119,7 @@ function SafetyPage() {
       const { data, error } = await supabase
         .from("ragging_reports")
         .select(
-          "id,wing,category,title,description,building,floor,room,incident_date,is_anonymous,severity,status,remarks,created_at,user_id",
+          "id,wing,category,title,description,building,floor,room,incident_date,is_anonymous,severity,status,remarks,created_at",
         )
         .order("created_at", { ascending: false })
         .limit(200);
