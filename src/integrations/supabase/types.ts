@@ -428,7 +428,36 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      lost_item_contacts: {
+        Row: {
+          contact_info: string | null
+          id: string | null
+        }
+        Insert: {
+          contact_info?: string | null
+          id?: string | null
+        }
+        Update: {
+          contact_info?: string | null
+          id?: string | null
+        }
+        Relationships: []
+      }
+      ragging_report_reporters: {
+        Row: {
+          id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       admin_exists: { Args: never; Returns: boolean }
@@ -440,7 +469,6 @@ export type Database = {
         }
         Returns: boolean
       }
-      is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "student" | "teacher" | "staff" | "admin"
